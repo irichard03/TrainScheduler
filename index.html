@@ -20,15 +20,15 @@
 
 </head>
 
-<body>
+<body alt="background Photo by Ludwig Wallendorff on Unsplash https://unsplash.com/photos/XKLj0xKV_d8">
     <!--Page container contains header, 2 sections and footer-->
-    <div class="container">
+    <div class="container-fluid ">
         <header>
             <!---Title container-->
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <h1>Train Scheduler</h1>
+                        <h1 class="h1 bg-dark">Train Scheduler</h1>
                     </div>
                 </div>
             </div>
@@ -37,13 +37,13 @@
         <hr>
         <!---Train Form-->
         <section>
-            <div class="container">
+            <div class="container bg-dark collapsableForm">
                 <!---Collapsable form so you can add trains or view trains to add mobile utility.-->
-                <form class"collapsableForm">
+                <form>
                     
                     <div class="form-row">
                         <div class="col">
-                            <label for="trainName">Train</label>
+                            <label for="trainName" class="contrastText">Train</label>
                         </div>
                         <div class="col">
                             <label for="destination">Destination</label>
@@ -63,7 +63,7 @@
 
                     <div class="form-row">
                         <div class="col">
-                            <label for="trainName">Departure Time</label>
+                            <label for="trainName" class="contrastText">Departure Time</label>
                         </div>
                         <div class="col">
                             <input type="text" class="form-control addDepartTime" placeholder="Enter military time">
@@ -74,7 +74,7 @@
 
                     <div class="form-row">
                         <div class="col">
-                            <label for="trainName">Frequency</label>
+                            <label for="trainName" class="contrastText">Frequency</label>
                         </div>
                         <div class="col">
                             <input type="text" class="form-control addTrainRuns" placeholder="Enter number of runs">
@@ -86,45 +86,47 @@
                     <div class="container mt-4">
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="btn btn-primary">Add Train</button>
+                                <button type="button" class="btn btn-primary" id="addTrainButton">Add Train</button>
                             </div> 
                             <div class="col">
-                                    <button type="button" class="btn btn-secondary">Hide Form</button>
+                                    <button type="button" class="btn btn-secondary" id="hideFormButton">Hide Form</button>
                             </div> 
                         </div>
                     </div>
 
                     <hr>
-
-                    <!--- Table for displaying schedule-->
-                    <table class="table">
-                            <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">Train</th>
-                                <th scope="col">Destination</th>
-                                <th scope="col">Frequency</th>
-                                <th scope="col">Arrival</th>
-                                <th scope="col">Minutes Out</th>
-                              </tr>
-                            </thead>
-                            <tbody id="trainTable">
-                            </tbody>
-
                 </form>
             </div>
         </section>
 
         <!---Train Table-->
         <section>
-
+            <!--- Table for displaying schedule-->
+            <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Train</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Arrival</th>
+                        <th scope="col">Minutes Out</th>
+                      </tr>
+                    </thead>
+                    <tbody id="trainTable">
+                    </tbody>
         </section>
-        
+    </div>
         <!---footer-->
         <footer>
-
+                
+                    
+                
         </footer>
-    </div>
     
+    
+    <!---Link to Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+
     <!--bootstrap cdn javascript-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
