@@ -16,33 +16,92 @@
     <!--Bootstrap CDN-->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!--link to my css-->
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
 </head>
 
 <body>
+    <!--Page container contains header, 2 sections and footer-->
+    <div class="container">
+        <header>
+            <!---Title container-->
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1>Train Scheduler</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <hr>
+        <!---Train Form-->
+        <section>
+            <div class="container">
+                <!---Collapsable form so you can add trains or view trains to add mobile utility.-->
+                <form class"collapsableForm">
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="trainName">Train</label>
+                        </div>
+                        <div class="col">
+                            <label for="destination">Destination</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Train">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Destination">
+                        </div>
+                    </div>
+                    
+                    <hr>
 
-    <header>
-    <!---Title-->
-    </header>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="trainName">Departure Time</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Enter military time">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-row">
+                            <div class="col">
+                                <label for="trainName">Frequency</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Enter number of runs">
+                            </div>
+                        </div>
+
+
+                </form>
+            </div>
+        </section>
+
+        <!---Train Table-->
+        <section>
+
+        </section>
+        
+        <!---footer-->
+        <footer>
+
+        </footer>
+    </div>
     
-    <!---Train Form-->
-    <section>
-
-    </section>
-
-    <!---Train Table-->
-    <section>
-
-    </section>
-    
-    <!---footer-->
-    <footer>
-
-    </footer>
-
     <!--bootstrap cdn javascript-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
     <!--link to my javascript-->
     <script src="assets/javascript/app.js"></script>
 
