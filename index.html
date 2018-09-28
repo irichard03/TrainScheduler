@@ -52,10 +52,10 @@
                     
                     <div class="form-row">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Train">
+                            <input type="text" class="form-control addTrain" placeholder="Train">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Destination">
+                            <input type="text" class="form-control addDestination" placeholder="Destination">
                         </div>
                     </div>
                     
@@ -66,21 +66,49 @@
                             <label for="trainName">Departure Time</label>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Enter military time">
+                            <input type="text" class="form-control addDepartTime" placeholder="Enter military time">
                         </div>
                     </div>
 
                     <hr>
 
                     <div class="form-row">
-                            <div class="col">
-                                <label for="trainName">Frequency</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Enter number of runs">
-                            </div>
+                        <div class="col">
+                            <label for="trainName">Frequency</label>
                         </div>
+                        <div class="col">
+                            <input type="text" class="form-control addTrainRuns" placeholder="Enter number of runs">
+                        </div>
+                    </div>
 
+                    <hr>
+
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-primary">Add Train</button>
+                            </div> 
+                            <div class="col">
+                                    <button type="button" class="btn btn-secondary">Hide Form</button>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!--- Table for displaying schedule-->
+                    <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Train</th>
+                                <th scope="col">Destination</th>
+                                <th scope="col">Frequency</th>
+                                <th scope="col">Arrival</th>
+                                <th scope="col">Minutes Out</th>
+                              </tr>
+                            </thead>
+                            <tbody id="trainTable">
+                            </tbody>
 
                 </form>
             </div>
