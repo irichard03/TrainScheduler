@@ -38,7 +38,7 @@ $(function(){
     
 
 
-    //todo attach onclick to buttons for form inputs and firebase writes.
+    //Click Event adds train to database and table.
     $('#addTrainButton').click(function(){
         console.log("buttonworks");
             trainName = $('.addTrain').val().trim();
@@ -56,8 +56,7 @@ $(function(){
            
     });
 
-    //build table is called on click, ref method references databse once, passing the database object to the function
-    //val method return snapshot, and it is assigned to latestSnapshot.
+    //build table is called on page load, writes all existing trains in database to table.
     function buildTable(){
         myDatabase.ref().once("value", function (snapshot) {
             var latestSnapshot = snapshot.val();
