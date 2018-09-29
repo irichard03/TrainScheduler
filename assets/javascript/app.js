@@ -24,9 +24,8 @@ $(function(){
     var frequency;
     var departTime; 
 
-    
 
-
+    buildTable();
 
 
 
@@ -53,7 +52,7 @@ $(function(){
                 frequency : frequency
             });
             
-            buildTable();
+            $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
            
     });
 
@@ -63,19 +62,17 @@ $(function(){
         myDatabase.ref().once("value", function (snapshot) {
             var latestSnapshot = snapshot.val();
             for(var looper in latestSnapshot){
-                console.log(latestSnapshot[looper].trainName);
+                
+                $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].departTime}</td><td>${latestSnapshot[looper].frequency}</td></tr>`);
             }
             
-            
-        
         });
-        $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
     }
     
 
-    //display all trains previously input to datbase
 
-    //
+
+
     //bonus todo attach document on click to displayed table rows so they can be removed, and removed from firebase database
 
 
