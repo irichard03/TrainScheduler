@@ -54,17 +54,24 @@ $(function(){
             });
             
             buildTable();
-            console.log(trainName);
-            console.log(destination);
-            console.log(departTime);
-            console.log(frequency);
+           
     });
 
-    //todo use  .once to display previously entered firebase 
+    //build table is called on click, 
     function buildTable(){
-        $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
+        myDatabase.ref().once("value", function (snapShot) {
+            var latestSnapshot = snapShot.val();
+            console.log(latestSnapshot);
+        
+        
+        });
+        //$('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
     }
     
+
+    //display all trains previously input to datbase
+
+    //
     //bonus todo attach document on click to displayed table rows so they can be removed, and removed from firebase database
 
 
