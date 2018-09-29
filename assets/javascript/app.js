@@ -13,6 +13,9 @@ $(function(){
     };
     //initialize firebase with config object with my firebase settings
     firebase.initializeApp(config);
+    
+
+
 
     //create my database instance and declare variables to store form inputs.
     var myDatabase = firebase.database();
@@ -20,6 +23,12 @@ $(function(){
     var destination;
     var frequency;
     var departTime; 
+
+    
+
+
+
+
 
     //stretch todo collapsable form
     $('#hideFormButton').click(function(){
@@ -35,8 +44,16 @@ $(function(){
         console.log("buttonworks");
             trainName = $('.addTrain').val().trim();
             destination = $('.addDestination').val().trim();
-            departTime = $('.addDepartTime').val().trim();
-            frequency = $('.addTrainFrequency').val().trim();
+            departTime = parseInt($('.addDepartTime').val().trim());
+            frequency = parseInt($('.addTrainFrequency').val().trim());
+            myDatabase.ref('Trains/' + trainName).push({
+                trainName : trainName,
+                destination: destination,
+                departTime : departTime,
+                frequency : frequency
+            });
+            
+            buildTable();
             console.log(trainName);
             console.log(destination);
             console.log(departTime);
@@ -44,7 +61,10 @@ $(function(){
     });
 
     //todo use  .once to display previously entered firebase 
-
+    function buildTable(){
+        $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
+    }
+    
     //bonus todo attach document on click to displayed table rows so they can be removed, and removed from firebase database
 
 
