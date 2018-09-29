@@ -46,7 +46,7 @@ $(function(){
             destination = $('.addDestination').val().trim();
             departTime = parseInt($('.addDepartTime').val().trim());
             frequency = parseInt($('.addTrainFrequency').val().trim());
-            myDatabase.ref('Trains/' + trainName).push({
+            myDatabase.ref().push({
                 trainName : trainName,
                 destination: destination,
                 departTime : departTime,
@@ -57,15 +57,19 @@ $(function(){
            
     });
 
-    //build table is called on click, 
+    //build table is called on click, ref method references databse once, passing the database object to the function
+    //val method return snapshot, and it is assigned to latestSnapshot.
     function buildTable(){
-        myDatabase.ref().once("value", function (snapShot) {
-            var latestSnapshot = snapShot.val();
-            console.log(latestSnapshot);
-        
+        myDatabase.ref().once("value", function (snapshot) {
+            var latestSnapshot = snapshot.val();
+            for(var looper in latestSnapshot){
+                console.log(latestSnapshot[looper].trainName);
+            }
+            
+            
         
         });
-        //$('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
+        $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
     }
     
 
