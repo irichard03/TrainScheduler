@@ -62,12 +62,19 @@ $(function(){
             var latestSnapshot = snapshot.val();
             for(var looper in latestSnapshot){
                 
-                $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].departTime}</td><td>${latestSnapshot[looper].frequency}</td></tr>`);
+                $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].departTime}</td><td>${latestSnapshot[looper].frequency}</td><td class="nextArrival"></tr>`);
             }
             
         });
     }
     
+    //toDo function to run clock (setInterval)
+
+    //add moment.js to use time functionality  (read moment api docs).
+
+    //add function to calc next arrival time, and update tr's with nextArrival Class
+
+
 
 
 
