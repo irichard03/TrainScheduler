@@ -21,10 +21,13 @@ $(function(){
     var myDatabase = firebase.database();
     var trainName;
     var destination;
-    var frequency;
+    var tripTIme;
     var departTime; 
-    var currentTime = moment().format('hh:mm a');
+    var currentTime = moment().format('HH:mm');
     var intervalController;
+    var intervalController2;
+    var nextArrival;
+    var timeNow = currentTime;
     console.log(currentTime);
 
     setClock();
@@ -54,8 +57,7 @@ $(function(){
                 departTime : departTime,
                 frequency : frequency
             });
-            
-            $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${departTime}</td><td>${frequency}</td></tr>`);
+            $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${tripTime}</td><td>${minutesOut}</td></tr>`);
            
     });
 
@@ -65,7 +67,8 @@ $(function(){
             var latestSnapshot = snapshot.val();
             for(var looper in latestSnapshot){
                 
-                $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].frequency}</td><td class="nextArrival"><td class="minutesOut"></tr>`);
+                
+                $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].tripTime}</td><td class="nextArrival">${nextArrival}<td class="minutesOut">${minutesOut}</tr>`);
             }
             
         });
@@ -77,17 +80,19 @@ $(function(){
     function setClock(){
         $('.clock').text(currentTime);
         intervalController = setInterval(function(){
-            currentTime = moment().format('hh:mm:ss a');
+            currentTime = moment().format('HH:mm ss');
             $('.clock').text(currentTime);
         },1000);
     }
 
-    //add moment.js to use time functionality  (read moment api docs).
-
-    //add function to calc next arrival time, and update tr's with nextArrival Class
-
-
-
+    
+    
+    //add function to calc next arrival time, pass in departTime and frequency as parameters
+   
+    //1. pass departTime and frequency into function.
+    //2. check format of those values.
+    //3. subtract start time from current time if negative or equal, return start time + frequnecy.
+    
 
 
 
