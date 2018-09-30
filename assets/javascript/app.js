@@ -1,8 +1,8 @@
-//On page load do this, too lazy for doc ready? Let's try this.
+//On page load do this
 $(function(){
     
     
-    //declare firebase object.
+    //declare firebase object, passing in my configuration settings.
     var config = {
         apiKey: "AIzaSyCdYIqcArlVzcxg3ZHkZGwIaCB2N7gBdo8",
         authDomain: "myseconddatabase-5c086.firebaseapp.com",
@@ -14,9 +14,6 @@ $(function(){
     //initialize firebase with config object with my firebase settings
     firebase.initializeApp(config);
     
-
-
-
     //create my database instance and declare variables to store form inputs.
     var myDatabase = firebase.database();
     var trainName;
@@ -30,22 +27,12 @@ $(function(){
     var timeNow = currentTime;
     var minutesOut;
     
-
+    //calls set interval to display clock
     setClock();
+    //calls build Table to show trains input by other users.
     buildTable();
 
-
-
-    //stretch todo collapsable form
-    $('#hideFormButton').click(function(e){
-        e.preventDefault();
-    });
-
-  
-    
-
-
-    //Click Event adds train to database and table.
+    //Click Event adds train to database and table, calls clear fields to clear input, and get arrival to calc next arrival and minutes till arrival
     $('#addTrainButton').click(function(e){
             e.preventDefault();
             trainName = $('.addTrain').val().trim();
@@ -61,7 +48,8 @@ $(function(){
             });
             console.log(departTime);
             console.log(tripTime);
-            $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${parseInt(tripTime)}</td><td>${minutesOut}</td></tr>`);
+            getArrival(departTime,tripTime);
+            $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${parseInt(tripTime)}</td><td>${nextArrival}</td><td>${minutesOut}</td></tr>`);
            
     });
     
@@ -73,7 +61,7 @@ $(function(){
         $('.addTripTime').val('');
     }
 
-    //build table is called on page load, writes all existing trains in database to table.
+    //build table is called on page load, writes all existing trains in database to table, calles getArrival.
     function buildTable(){
         myDatabase.ref().once("value", function (snapshot) {
             var latestSnapshot = snapshot.val();
@@ -85,9 +73,7 @@ $(function(){
         });
     }
     
-
-
-    //toDo function to run clock (setInterval)
+    // function to run clock (setInterval)
     function setClock(){
         $('.clock').text(currentTime);
         intervalController = setInterval(function(){
@@ -96,6 +82,7 @@ $(function(){
         },1000);
     }
     
+    //I had to copy and refactor the activity code for this section
     //get arrival takes in two arguments, start and trip, assigns them to local varibales.
     //Then I pass the startTime as an argument, along with desired format to moment, and call it's subtract method with argument # to subtract,
     // and moment object parameter to subtract from???
@@ -120,24 +107,4 @@ $(function(){
         var addArrival = moment().add(minutesOut, "minutes");
         nextArrival = moment(addArrival).format("HH:mm");
     }
-    
-    
-    //add function to calc next arrival time, pass in departTime and frequency as parameters
-   
-    //1. pass departTime and frequency into function.
-    //2. check format of those values.
-    
-    //3. subtract start time from current time if negative or equal, return start time + frequnecy.
-    
-    //4. If positive use modulus on diffference between start time current time, minutes until arrival = the remainder.
-
-
-    //bonus todo attach document on click to displayed table rows so they can be removed, and removed from firebase database
-
-
-
-
-
-
-
 });
