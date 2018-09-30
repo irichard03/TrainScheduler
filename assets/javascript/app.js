@@ -37,8 +37,8 @@ $(function(){
 
 
     //stretch todo collapsable form
-    $('#hideFormButton').click(function(){
-        
+    $('#hideFormButton').click(function(e){
+        e.preventDefault();
     });
 
   
@@ -46,21 +46,32 @@ $(function(){
 
 
     //Click Event adds train to database and table.
-    $('#addTrainButton').click(function(){
-        
+    $('#addTrainButton').click(function(e){
+            e.preventDefault();
             trainName = $('.addTrain').val().trim();
             destination = $('.addDestination').val().trim();
-            departTime = parseInt($('.addDepartTime').val().trim());
-            tripTime = parseInt($('.addTripTime').val().trim());
+            departTime = $('.addDepartTime').val().trim();
+            tripTime = $('.addTripTime').val().trim();
+            clearFields();
             myDatabase.ref().push({
                 trainName : trainName,
                 destination: destination,
                 departTime : departTime,
                 tripTime : tripTime,
             });
-            $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${tripTime}</td><td>${minutesOut}</td></tr>`);
+            console.log(departTime);
+            console.log(tripTime);
+            $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${parseInt(tripTime)}</td><td>${minutesOut}</td></tr>`);
            
     });
+    
+    //function to clear fields after adding train.
+    function clearFields(){
+        $('.addTrain').val('');
+        $('.addDestination').val('');
+        $('.addDepartTime').val('');
+        $('.addTripTime').val('');
+    }
 
     //build table is called on page load, writes all existing trains in database to table.
     function buildTable(){
@@ -86,26 +97,25 @@ $(function(){
     }
 
     function getArrival(start,trip,timeNow){
-        console.log(start);
-        console.log(trip);
-        console.log(timeNow);
-        var startEpoch = moment(start).format("X")
-        console.log(startEpoch);
-        var timeNowEpoch = moment(timeNow).format("X");
-        console.log(timeNowEpoch);        
-
+        console.log("start time " + start);
+        console.log("Trip Time " + trip);
+        console.log("Current Time " + timeNow);
+        
+        
+        
         if(moment(timeNow).format('HH:mm') <= (moment(start).format('HH:mm'))){
-            alert("start is start time plus trip time");
-            minutesOut = (startEpoch - timeNowEpoch)/60000;
+            minutesOut = start - timeNow;
             return start + trip;  
         }else{
-            var x = (timeNowEpoch - startEpoch)/60000;
+            var x = timeNow - start;
             var y = x%trip;
             mintuesOut = y;
             var n = x/trip;
             var z = start + (trip*n);
             return z;
         }
+    
+       return "nothing";
     }
     
     
