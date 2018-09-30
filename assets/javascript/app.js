@@ -78,7 +78,7 @@ $(function(){
         myDatabase.ref().once("value", function (snapshot) {
             var latestSnapshot = snapshot.val();
             for(var looper in latestSnapshot){
-                nextArrival = getArrival(latestSnapshot[looper].departTime,latestSnapshot[looper].tripTime,timeNow);
+                nextArrival = getArrival(latestSnapshot[looper].departTime,latestSnapshot[looper].tripTime);
                 $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].tripTime}</td><td class="nextArrival">${nextArrival}<td class="minutesOut">${minutesOut}</tr>`);
             }
             
@@ -96,13 +96,17 @@ $(function(){
         },1000);
     }
 
-    function getArrival(start,trip,timeNow){
-        console.log("start time " + start);
-        console.log("Trip Time " + trip);
-        console.log("Current Time " + timeNow);
-        
-        
-        
+    function getArrival(start,trip){
+        var frequency = trip;
+        var startTime = start.toString();
+        convertedStartTime = moment(startTime, "HH:mm");
+        var minutesDifferent = moment().diff(moment(convertedStartTime), "minutes");    //I don't understand this.
+        console.log(frequency);
+        console.log(startTime);
+        console.log(convertedStartTime);
+        console.log(minutesDifferent);
+
+        /**
         if(moment(timeNow).format('HH:mm') <= (moment(start).format('HH:mm'))){
             minutesOut = start - timeNow;
             return start + trip;  
@@ -114,7 +118,7 @@ $(function(){
             var z = start + (trip*n);
             return z;
         }
-    
+    */
        return "nothing";
     }
     
