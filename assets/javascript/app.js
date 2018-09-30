@@ -23,15 +23,18 @@ $(function(){
     var destination;
     var frequency;
     var departTime; 
+    var currentTime = moment().format('hh:mm a');
+    var intervalController;
+    console.log(currentTime);
 
-
+    setClock();
     buildTable();
 
 
 
     //stretch todo collapsable form
     $('#hideFormButton').click(function(){
-        console.log("buttonworks");
+        
     });
 
   
@@ -40,7 +43,7 @@ $(function(){
 
     //Click Event adds train to database and table.
     $('#addTrainButton').click(function(){
-        console.log("buttonworks");
+        
             trainName = $('.addTrain').val().trim();
             destination = $('.addDestination').val().trim();
             departTime = parseInt($('.addDepartTime').val().trim());
@@ -68,7 +71,16 @@ $(function(){
         });
     }
     
+
+
     //toDo function to run clock (setInterval)
+    function setClock(){
+        $('.clock').text(currentTime);
+        intervalController = setInterval(function(){
+            currentTime = moment().format('hh:mm:ss a');
+            $('.clock').text(currentTime);
+        },1000);
+    }
 
     //add moment.js to use time functionality  (read moment api docs).
 
