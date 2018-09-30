@@ -65,7 +65,7 @@ $(function(){
             var latestSnapshot = snapshot.val();
             for(var looper in latestSnapshot){
                 
-                $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].departTime}</td><td>${latestSnapshot[looper].frequency}</td><td class="nextArrival"></tr>`);
+                $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].frequency}</td><td class="nextArrival"></tr><td class="minutesOut"></tr>`);
             }
             
         });
