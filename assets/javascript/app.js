@@ -1,6 +1,6 @@
 //On page load do this, too lazy for doc ready? Let's try this.
 $(function(){
-    //console.log("bootsrap works.");
+    
     
     //declare firebase object.
     var config = {
@@ -21,14 +21,15 @@ $(function(){
     var myDatabase = firebase.database();
     var trainName;
     var destination;
-    var tripTIme;
+    var tripTime;
     var departTime; 
     var currentTime = moment().format('HH:mm');
     var intervalController;
     var intervalController2;
     var nextArrival;
     var timeNow = currentTime;
-    console.log(currentTime);
+    var minutesOut;
+    
 
     setClock();
     buildTable();
@@ -50,12 +51,12 @@ $(function(){
             trainName = $('.addTrain').val().trim();
             destination = $('.addDestination').val().trim();
             departTime = parseInt($('.addDepartTime').val().trim());
-            frequency = parseInt($('.addTrainFrequency').val().trim());
+            tripTime = parseInt($('.addTripTime').val().trim());
             myDatabase.ref().push({
                 trainName : trainName,
                 destination: destination,
                 departTime : departTime,
-                frequency : frequency
+                tripTime : tripTime,
             });
             $('#trainTable').append(`<tr><td>${trainName}</td><td>${destination}</td><td>${tripTime}</td><td>${minutesOut}</td></tr>`);
            
@@ -66,8 +67,7 @@ $(function(){
         myDatabase.ref().once("value", function (snapshot) {
             var latestSnapshot = snapshot.val();
             for(var looper in latestSnapshot){
-                
-                
+                nextArrival = getArrival(latestSnapshot[looper].departTime,latestSnapshot[looper].tripTime,timeNow);
                 $('#trainTable').append(`<tr><td>${latestSnapshot[looper].trainName}</td><td>${latestSnapshot[looper].destination}</td><td>${latestSnapshot[looper].tripTime}</td><td class="nextArrival">${nextArrival}<td class="minutesOut">${minutesOut}</tr>`);
             }
             
@@ -85,15 +85,38 @@ $(function(){
         },1000);
     }
 
+    function getArrival(start,trip,timeNow){
+        console.log(start);
+        console.log(trip);
+        console.log(timeNow);
+        var startEpoch = moment(start).format("X")
+        console.log(startEpoch);
+        var timeNowEpoch = moment(timeNow).format("X");
+        console.log(timeNowEpoch);        
+
+        if(moment(timeNow).format('HH:mm') <= (moment(start).format('HH:mm'))){
+            alert("start is start time plus trip time");
+            minutesOut = (startEpoch - timeNowEpoch)/60000;
+            return start + trip;  
+        }else{
+            var x = (timeNowEpoch - startEpoch)/60000;
+            var y = x%trip;
+            mintuesOut = y;
+            var n = x/trip;
+            var z = start + (trip*n);
+            return z;
+        }
+    }
     
     
     //add function to calc next arrival time, pass in departTime and frequency as parameters
    
     //1. pass departTime and frequency into function.
     //2. check format of those values.
+    
     //3. subtract start time from current time if negative or equal, return start time + frequnecy.
     
-
+    //4. If positive use modulus on diffference between start time current time, minutes until arrival = the remainder.
 
 
     //bonus todo attach document on click to displayed table rows so they can be removed, and removed from firebase database
